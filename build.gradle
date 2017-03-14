@@ -33,9 +33,9 @@ dependencies {
 	
 	compile files('libs/ojdbc6.jar')
 	
+	
 	// https://mvnrepository.com/artifact/c3p0/c3p0
 	compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
-	
 	
 	// https://mvnrepository.com/artifact/org.mybatis/mybatis
 	compile group: 'org.mybatis', name: 'mybatis', version: '3.3.1'
@@ -48,6 +48,8 @@ dependencies {
 	
 	
 	
+    
+    
     
 }
 
