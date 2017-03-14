@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+<bean name="greetingTarget" class="spring.chap09.GreetingServiceImpl">
+<property name="greeting">
+<value>hello</value>
+</property>
+</bean>
+
+
+<bean name="logAspect" class="spring.chap09.LogAspect"></bean>
+<bean name="performAspect" class="spring.chap09.PerformAspect"></bean>
+
+
+<!-- 혹시 aop가 안되면 proxy-target-class="true"설정 걸기  -->
+<aop:config proxy-target-class="true">
+<aop:pointcut id="publicMethod" expression="execution(public * *(..))" />
+<aop:aspect ref="logAspect">
+<aop:before method="beforeLogging" pointcut-ref="publicMethod"/>
+<aop:after-returning method="afterLogging" pointcut-ref="publicMethod" returning="returnValue"/>
+<aop:after-throwing method="throwingLogging" pointcut-ref="publicMethod" throwing="e"/>
+<aop:after method="alwaysLogging" pointcut-ref="publicMethod"/>
+</aop:aspect>
+
+<!-- 
+
+<aop:aspect ref="performAspect">
+<aop:around method="timeCheck" pointcut-ref="publicMethod"/>
+</aop:aspect>
+ -->
+
+
+
+<!-- public(접근 제어자) *( 반환형) spring.chap09(패키지명) 메소드명-->
+<!-- 
+<aop:aspect ref="performAspect">
+<aop:around method="timeCheck" pointcut="execution(public * spring.chap09 sayHello(..) )"/>
+</aop:aspect>
+ -->
+
+
+
+</aop:config>
+
+
+
+</beans>

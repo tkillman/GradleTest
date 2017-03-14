@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+<!-- autowire="byName"인 경우
+    property의 이름과 bean의 이름이 같은 것을 넣어준다. -->
+
+
+<bean name="bar" class="spring.chap05.Bar"></bean>
+<bean name="baz" class="spring.chap05.Baz"></bean>
+
+<bean name="foo" class="spring.chap05.Foo" autowire="byName"></bean>
+
+
+
+
+
+<!-- autowire="byType"인 경우
+	property와 같은 타입의 bean을 넣어주는데 주의할 점은 싱글 매치가 되어야 한다.
+	하위 객체와 상위 객체가 있을 경우에는 상위 객체가 할당된다.
+ -->
+ 
+<!-- 
+<bean name="bar_sub" class="spring.chap05.Bar_sub"></bean>
+<bean name="bar_sub1" class="spring.chap05.Bar_sub"></bean>
+<bean name="baz" class="spring.chap05.Baz"></bean>
+
+<bean name="foo" class="spring.chap05.Foo" autowire="byType"></bean>
+ -->
+
+
+
+</beans>

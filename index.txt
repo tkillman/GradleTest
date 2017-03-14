@@ -1,0 +1,40 @@
+1.스프링이란~?
+전자정부 표준 프레임워크
+
+2.특징
+자바 사용, 경량, 
+객체 관리 DI(dependency injection)
+,관점지향 (AOP aspect-oriented programming)
+
+3.프로젝트 종류
+maven : 좀 무겁다
+gradle : 가볍다. 대세는 gradle
+
+4. gradle에 jar 추가 방법
+ㄱ) maven repository에서 해당 gradle 경로를 build.gradle의 dependencies에 붙여넣기
+ㄴ) 프로젝트 우클린 후 gradle -> gradle refreshproject
+
+5.객체 생성 후 불러보자! spring.chap01
+
+ㄱ) src/main/java 에 클래스 정의
+ㄴ) src/main/resource 에 
+<bean id="정의" class="패키지명.클래스명">
+ㄷ_1) project에 maven repository에서 spring-context를 import
+ㄷ_2) main 메소드에서 
+
+ApplicationContext context 
+= new GenericXmlApplicationContext("resource파일이름");
+
+원하는 클래스 레퍼런스변수 = context.getbean("bean이름","명시적 형변환할 클래스이름")
+
+레퍼런스변수.원하는메소드()
+
+6. 객체 의존성이란~~~~???
+A클래스에서 B의 객체를 생성하고 B의 메소드를 부르면 A클래스는 B에 의존적이라고 한다.
+
+7.객체의 생성자에 값과 다른 객체를 넣어보자. spring.chap02
+
+
+
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<context:property-placeholder location="classpath:db.properties"/>
+
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+<property name="driverClass" value="${jdbc.driver}"></property>
+<property name="jdbcUrl" value="${jdbc.url}"></property>
+<property name="user" value="${jdbc.username}"></property>
+<property name="password" value="${jdbc.password}"></property>
+<property name="initialPoolSize" value="5"></property>
+<property name="maxPoolSize" value="30"></property>
+<property name="minPoolSize" value="5"></property>
+<property name="acquireIncrement" value="3"></property>
+<property name="acquireRetryAttempts" value="30"></property>
+<property name="acquireRetryDelay" value="100"></property>
+<property name="idleConnectionTestPeriod" value="60"></property>
+<property name="preferredTestQuery" value="SELECT 1"></property>
+<property name="testConnectionOnCheckin" value="true"></property>
+<property name="testConnectionOnCheckout" value="false"></property>
+</bean>
+
+<bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="dataSource"></bean>
+
+<bean name="jdbcDao" class="spring.chap11.UserDaoImpl1" >
+
+<!-- <property name="jdbcTemplate" ref="jdbcTemplate"></property> -->
+
+<property name="dataSource" ref="dataSource"></property>
+</bean>
+</beans>

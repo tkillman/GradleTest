@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- xml namespace 접두어에 p를 사용하겠다. -->
+	
+	<bean name="writeArticleService" class ="spring.chap01.WriteArticleServiceImpl">
+	<constructor-arg>
+		<ref bean="articleDao"/>
+	</constructor-arg>
+	</bean>
+
+<bean name="articleDao" class="spring.chap01.MySQLArticleDao"></bean>
+
+
+<bean id="bar" class="spring.chap02.Bar"></bean>
+<bean id="baz" class="spring.chap02.Baz"></bean>
+
+
+<!-- <bean id="foo" class="spring.chap02.Foo">
+<constructor-arg>
+<ref bean="bar"/>
+</constructor-arg>
+<constructor-arg>
+<ref bean="baz"/>
+</constructor-arg>
+</bean>
+ -->
+
+
+<!-- <bean id="foo" class="spring.chap02.Foo">
+타입을 지정해주지 않으면 우선순위는 String
+<constructor-arg value="100"></constructor-arg>
+<constructor-arg value="200"></constructor-arg>
+
+<constructor-arg>
+<ref bean="bar"/>
+</constructor-arg>
+<constructor-arg>
+<ref bean="baz"/>
+</constructor-arg>
+
+</bean>
+ -->
+
+<!-- 기본 생성자를 실행하고 set()를 통해서 값을 지정해준다. -->
+<!-- <bean id="foo" class="spring.chap02.Foo">
+<property name="bar">
+<ref bean="bar"></ref>
+</property>
+<property name="baz" ref="baz"></property>
+<property name="i" value="10"></property>
+</bean> -->
+
+<!-- p:변수명-ref or 생략 = "값" -->
+<!-- <bean id="foo" class="spring.chap02.Foo" p:bar-ref="bar" p:baz-ref="baz" p:i="10"></bean> -->
+
+<bean id="foo" class="spring.chap02.Foo" c:s="10" c:s2="100" c:bar-ref="bar" c:baz-ref="baz" p:i="10"/>
+
+
+<bean name="bar2" class="spring.chap03.Bar2"></bean>
+<bean name="Foo2" class="spring.chap03.Foo2">
+<lookup-method name="getBar2" bean="bar2"/>
+</bean>
+
+
+<bean name="collEx" class="spring.chap04.CollEx">
+<property name="listValue">
+<list>
+<value type="java.lang.Integer">10</value>
+<value type="java.lang.Integer">200</value>
+</list>
+</property>
+
+<property name="mapValue">
+<map>
+<entry>
+<key><value>hello</value></key>
+<ref bean="bar"></ref>
+</entry>
+<entry>
+<key><value>hi</value></key>
+<ref bean="baz"></ref>
+</entry>
+</map>
+</property>
+
+<property name="propValue">
+<props>
+<prop key="hello">2000</prop>
+<prop key="hi">12012</prop>
+</props>
+</property>
+</bean>
+
+
+
+</beans>

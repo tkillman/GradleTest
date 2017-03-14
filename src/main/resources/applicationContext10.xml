@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+
+<bean name="beforeLogAdvice" class="spring.chap10.MethodBeforeLogAdvice"></bean>
+
+
+<bean name="greetingTarget" class="spring.chap10.GreetingServiceImpl">
+<property name="greeting"><value>hello</value></property>
+
+</bean>
+
+
+<bean name="helloPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+<property name="pattern">
+<value>.*sayHello.*</value>
+</property>
+</bean>
+
+<bean name="helloAdvisor" class="org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor">
+<property name="advice">
+<ref bean="beforeLogAdvice"></ref>
+</property>
+<property name="pointcut">
+<ref bean="helloPointcut"></ref>
+</property>
+</bean>
+
+
+<bean id="greeting" class="org.springframework.aop.framework.ProxyFactoryBean">
+<property name="target">
+<ref bean="greetingTarget"/>
+</property>
+<property name="interceptorNames">
+<list>
+<value>helloAdvisor</value>
+</list>
+</property>
+</bean>
+
+
+
+
+
+</beans>
